@@ -1,0 +1,46 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id            Int     @id @default(autoincrement())
+  AdminName     String
+  AdminEmail    String  @unique
+  adminPassword String
+  blogs         Blog[]
+  events        Event[]
+}
+
+  model Blog {
+    id          Int      @id @default(autoincrement())
+    title       String
+    description String
+    author      Admin    @relation(fields: [authorId], references: [id])
+    authorId    Int
+    date        DateTime @default(now())
+    image       String
+  }
+
+model Contact {
+  id      Int    @id @default(autoincrement())
+  name    String
+  message String
+  email   String
+  tel     String
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  address     String
+  image       String
+  datetime    DateTime
+  adminId     Int
+  admin       Admin    @relation(fields: [adminId], references: [id])
+}
