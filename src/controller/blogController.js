@@ -48,7 +48,7 @@ const BlogController = {
     try {
       const blog = await Blog.getBlogById(parseInt(id));
       // Format the image path dynamically
-      blog.image = blog.image.split(',').map(file => `/uploads/${file}`).join(',');
+      blog.image = blog.image.split(',').map(file => `http://localhost:5000/${file}`).join(',');
       res.json(blog);
     } catch (error) {
       res.status(500).json({ message: `Failed to fetch blog by ID: ${error.message}` });
