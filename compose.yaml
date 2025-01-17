@@ -6,7 +6,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 5000:5000
+      - 5500:5500
     networks:
       - my-network
     command: sh setup.sh
