@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-RUN mkdir -p /home/node/app && chown -R node:node /home/node/appexpo
+RUN mkdir -p /home/node/appexpo && chown -R node:node /home/node/appexpo
 
 USER node
 
