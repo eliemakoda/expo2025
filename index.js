@@ -76,7 +76,7 @@ const authenticateJWT = (req, res, next) => {
 app.use("/api/blogs", BlogRouter);
 app.use("/api/events", eventRoutes);
 app.use("/api/contacts", ContactRouter);
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(path.join(process.cwd() + "/src/assets/build/index.html")));
 });
 app.listen(PORT, () => {
