@@ -37,7 +37,7 @@ const EventController = {
       // Format the image paths dynamically (from filenames)
       const formattedEvents = events.map(event => ({
         ...event,
-        image: event.image.split(',').map(file => `http://localhost:5000/${file}`).join(','),
+        image: event.image.split(',').map(file => `https://expo2025osakajapan.com/${file}`).join(','),
       }));
 
       res.json(formattedEvents);

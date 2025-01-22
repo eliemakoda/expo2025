@@ -34,7 +34,7 @@ const BlogController = {
       const blogs = await Blog.getAllBlogs();
       const formattedBlogs = blogs.map(blog => ({
         ...blog,
-        image: blog.image.split(',').map(file => `http://localhost:5000/${file}`).join(','),
+        image: blog.image.split(',').map(file => `https://expo2025osakajapan.com/${file}`).join(','),
       }));
       res.json(formattedBlogs);
     } catch (error) {
@@ -48,7 +48,7 @@ const BlogController = {
     try {
       const blog = await Blog.getBlogById(parseInt(id));
       // Format the image path dynamically
-      blog.image = blog.image.split(',').map(file => `http://localhost:5000/${file}`).join(',');
+      blog.image = blog.image.split(',').map(file => `https://expo2025osakajapan.com/${file}`).join(',');
       res.json(blog);
     } catch (error) {
       res.status(500).json({ message: `Failed to fetch blog by ID: ${error.message}` });

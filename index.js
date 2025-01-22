@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://expo2025osakajapan.com",
   })
 );
 
@@ -76,7 +76,7 @@ const authenticateJWT = (req, res, next) => {
 app.use("/api/blogs", BlogRouter);
 app.use("/api/events", eventRoutes);
 app.use("/api/contacts", ContactRouter);
-app.get("/*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(path.join(process.cwd() + "/src/assets/build/index.html")));
 });
 app.listen(PORT, () => {
