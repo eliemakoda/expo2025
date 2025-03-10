@@ -1,6 +1,6 @@
-const Event = require('../model/eventModel.model');
-const multer = require('multer');
-const path = require('path');
+const Event = require("../model/eventModel.model");
+const multer = require("multer");
+const path = require("path");
 
 // Handle multiple file upload and event creation
 const EventController = {
@@ -10,7 +10,7 @@ const EventController = {
       const { title, description, address, datetime, adminId } = req.body;
 
       // Extract filenames of uploaded files (store only filenames, not the full path)
-      const fileNames = req.files.map(file => file.filename);
+      const fileNames = req.files.map((file) => file.filename);
 
       // Create the new event entry in the database
       const newEvent = await Event.createEvent({
@@ -18,14 +18,16 @@ const EventController = {
         description,
         address,
         datetime,
-        image: fileNames.join(','),  // Store filenames as a comma-separated string
+        image: fileNames.join(","), // Store filenames as a comma-separated string
         adminId: parseInt(adminId),
       });
 
-      return res.status(201).json(newEvent);  // Return the created event object
+      return res.status(201).json(newEvent); // Return the created event object
     } catch (error) {
-      console.log(error.message)
-      return res.status(500).json({ message: `Failed to create event: ${error.message}` });
+      console.log(error.message);
+      return res
+        .status(500)
+        .json({ message: `Failed to create event: ${error.message}` });
     }
   },
 
@@ -35,14 +37,16 @@ const EventController = {
       const events = await Event.getAllEvents();
 
       // Format the image paths dynamically (from filenames)
-      const formattedEvents = events.map(event => ({
+      const formattedEvents = events.map((event) => ({
         ...event,
-        image: event.image.split(',').map(file => `https://expo2025osakajapan.com/${file}`).join(','),
+        image: event.image,
       }));
 
       res.json(formattedEvents);
     } catch (error) {
-      res.status(500).json({ message: `Failed to fetch events: ${error.message}` });
+      res
+        .status(500)
+        .json({ message: `Failed to fetch events: ${error.message}` });
     }
   },
 
@@ -53,11 +57,12 @@ const EventController = {
       const event = await Event.getEventById(parseInt(id));
 
       // Format the image paths dynamically (from filenames)
-      event.image = event.image.split(',').map(file => `/uploads/${file}`).join(',');
-
+      event.image = event.image
       res.json(event);
     } catch (error) {
-      res.status(500).json({ message: `Failed to fetch event by ID: ${error.message}` });
+      res
+        .status(500)
+        .json({ message: `Failed to fetch event by ID: ${error.message}` });
     }
   },
 
@@ -68,7 +73,9 @@ const EventController = {
       const updatedEvent = await Event.updateEvent(parseInt(id), req.body);
       res.json(updatedEvent);
     } catch (error) {
-      res.status(500).json({ message: `Failed to update event: ${error.message}` });
+      res
+        .status(500)
+        .json({ message: `Failed to update event: ${error.message}` });
     }
   },
 
@@ -77,9 +84,11 @@ const EventController = {
     const { id } = req.params;
     try {
       await Event.deleteEvent(parseInt(id));
-      res.status(204).send();  // No content
+      res.status(204).send(); // No content
     } catch (error) {
-      res.status(500).json({ message: `Failed to delete event: ${error.message}` });
+      res
+        .status(500)
+        .json({ message: `Failed to delete event: ${error.message}` });
     }
   },
 };

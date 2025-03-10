@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://expo2025osakajapan.com",
+    // origin: "http://localhost:3000",
   })
 );
 
@@ -77,7 +78,9 @@ app.use("/api/blogs", BlogRouter);
 app.use("/api/events", eventRoutes);
 app.use("/api/contacts", ContactRouter);
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(path.join(process.cwd() + "/src/assets/build/index.html")));
+  res.sendFile(
+    path.join(path.join(process.cwd() + "/src/assets/build/index.html"))
+  );
 });
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
